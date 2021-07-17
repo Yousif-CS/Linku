@@ -80,6 +80,8 @@ export default class ProjectsController {
 
     // Get the tasks
     await project.load('tasks')
+    await project.load('mentor')
+    await project.load('mentees')
     return response.ok(project)
   }
 }

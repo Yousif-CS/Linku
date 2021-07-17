@@ -52,8 +52,9 @@ export const { actions } = Bouncer.define('isMentor', async (user: User) => {
   }
 
   const project = await Project.query().preload('mentor', (query) => {
-    query.where('projects.mentor_id', mentor[0].id)
+    query.where('mentors.id', mentor[0].id)
   })
+
   // Is mentor a participant in the project
   if (project.length === 0) return false
 

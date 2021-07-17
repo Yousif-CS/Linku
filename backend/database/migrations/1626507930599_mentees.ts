@@ -13,7 +13,7 @@ export default class Mentees extends BaseSchema {
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
       table.integer('user_id').references('id').inTable('users').notNullable()
-      table.integer('project_id').references('id').inTable('project').nullable()
+      table.integer('project_id').references('id').inTable('projects').nullable()
     })
   }
 
