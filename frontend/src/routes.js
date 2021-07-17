@@ -2,7 +2,8 @@ import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-//
+
+import React from 'react';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
@@ -12,10 +13,13 @@ import User from './pages/User';
 import NotFound from './pages/Page404';
 import AccessDenied from './pages/AccessDenied';
 import Profile from './pages/Profile';
-import Home from './pages/Home';
+import { AppContext } from './utils/Store'
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
+  const user = React.useContext(AppContext).user;
+  
   return useRoutes([
     {
       path: '/dashboard',
