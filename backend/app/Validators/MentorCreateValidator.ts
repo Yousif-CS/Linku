@@ -19,7 +19,7 @@ export default class MentorCreateValidator {
     ]),
     phone: schema.string({ trim: true, escape: true }, [rules.required(), rules.mobile()]),
     company: schema.string({ trim: true, escape: true }),
-    role: schema.string({ trim: true, escape: true }, [rules.required()]),
+    role: schema.string({ trim: true, escape: true }),
   })
 
   /**
