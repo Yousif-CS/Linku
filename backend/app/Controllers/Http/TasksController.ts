@@ -11,25 +11,28 @@ export default class TasksController {
     return response.created(newProject)
   }
 
-  public async putTask({ auth, request, response }) {
-    await auth.use('api').authenticate()
-    const input = await request.validate(TaskValidator)
-    const task = await Task.findOrFail(request.param('id'))
-    if (input.tite) {
-      task.title = input.title
+    public async putTask({auth, request, params, response}) {
+        await auth.use('api').authenticate()
+        const input = await request.validate(TaskValidator)
+        const task = await Task.findOrFail(params.id) 
+        if (input.tite){
+            task.title = input.title
+        }
+        if (input.description) {
+            task.description = input.description
+        }
+        if (input.label) {
+            task.label = input.label
+        }
+        if (input.mentee_id) {
+            task.mentee_id = input.mentee_id
+        }
+        await task.save()
+        return response.status(200)
     }
-    if (input.description) {
-      task.description = input.description
-    }
-    if (input.label) {
-      task.label = input.label
-    }
-    if (input.mentee_id) {
-      task.mentee_id = input.mentee_id
-    }
-    await task.save()
-    return response.status(200)
-  }
 
-  public async getTask({ auth, request, response }) {}
+    public async getTask({auth, params, response}) {
+        const task = Task.findOrFail(params.id)
+        return task
+    }
 }
