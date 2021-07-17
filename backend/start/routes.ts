@@ -20,6 +20,11 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.post('/project/', 'ProjectsController.postProject')
+Route.post('/task/', 'TasksController.postTask')
+Route.put('/task/:id', 'TasksController.putTask')
+Route.get('/task/:id', 'TasksController.getTask')
+Route.post('/register/mentor', 'RegistrationsController.mentor')
+Route.post('/register/mentee', 'RegistrationsController.mentee')
+Route.post('/login', 'AuthController.create')
+Route.post('/logout', 'AuthController.destroy')

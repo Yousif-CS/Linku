@@ -160,7 +160,6 @@ export default class IndustrySeeder extends BaseSeeder {
       'Wireless',
       'Writing & Editing',
     ]
-
     const industryDicts: Array<IndustryDict> = []
 
     for (var i = 0; i < industries.length; i++) {

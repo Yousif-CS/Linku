@@ -13,6 +13,8 @@ export default class UsersSchema extends BaseSchema {
       table.integer('industry_id').references('id').inTable('industries').notNullable()
       table.string('company').notNullable()
       table.string('role').notNullable()
+      table.string('first_name').notNullable()
+      table.string('last_name').notNullable()
 
       /**
        * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL
