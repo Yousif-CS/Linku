@@ -13,7 +13,7 @@ export const defaultUser = {
 }
 
 const cardStyle = {
-  backgroundColor: '#d5e7f5',
+  backgroundColor: '#eef3f9',
   flexGrow: 1,
   boxShadow: 10,
   borderRadius: 10,
@@ -27,12 +27,12 @@ const cardStyle = {
 }
 
 const labelStyle = {
-  color: '#4C4C4C', 
+  color: '#2867b2', 
   fontWeight: 'bold'
 }
 
 const titleStyle = {
-  color: '#4C4C4C', fontSize: 20, marginBottom: 10,
+  color: '#2867b2', fontSize: 20, marginBottom: 10,
 }
 
 export const boardData = {
