@@ -27,7 +27,6 @@ import { Navigate, useRoutes } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
-    height: "100%",
     background: "linear-gradient(180deg, #FFFFFF 50%, #1f5391 50%)",
   },
   bigCard: {
@@ -35,6 +34,14 @@ const useStyles = makeStyles({
   },
   container: {
     paddingTop: '150px'
+  },
+  text: {
+      textAlign: 'center',
+      paddingTop: '40px',
+      paddingBottom: '40px',
+      paddingLeft: '40px',
+      paddingRight: '40px',
+      height: '100%'
   }
 });
 
@@ -98,12 +105,18 @@ export default function Home() {
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
             <Card>
-            Image
+            <img src="/static/project_board_all.jpg" />
             </Card>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Card>
-            Statement
+            <Card className={classes.text}>
+            <Typography variant="h3">Engage with industry mentors</Typography>
+              <Typography gutterBottom variant="subtitle1" sx={{ opacity: 0.72 }}>
+                who have experience in your industries and companies of interest.
+              </Typography>
+              <Typography variant="subtitle1" sx={{ opacity: 0.72 }}>
+                Get exposure to what industry is really like, find out what you want to do, get tips for uni, and build lasting connections on LinkU.
+              </Typography>
             </Card>
           </Grid>
         </Grid>
