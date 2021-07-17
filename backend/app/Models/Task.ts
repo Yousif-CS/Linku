@@ -25,7 +25,7 @@ export default class Task extends BaseModel {
   public status: number
 
   @column()
-  public mentee_id: number
+  public mentee_id?: number
 
   @column()
   public project_id: number
