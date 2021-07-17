@@ -12,8 +12,9 @@ export default class TaskValidator {
   public schema = schema.create({
     title: schema.string({ trim: true, escape: true }, [rules.required()]),
     description: schema.string.optional({ trim: true, escape: true }),
-    label: schema.enum.optional([TaskStatus.Todo, TaskStatus.InProgress, TaskStatus.Done]),
-    mentee_id: schema.number([rules.exists({ table: 'mentees', column: 'id' })]),
+    label: schema.string.optional({ trim: true, escape: true }),
+    status: schema.enum.optional([TaskStatus.Todo, TaskStatus.InProgress, TaskStatus.Done]),
+    mentee_id: schema.number.optional([rules.exists({ table: 'mentees', column: 'id' })]),
     project_id: schema.number([rules.exists({ table: 'projects', column: 'id' })]),
   })
 
