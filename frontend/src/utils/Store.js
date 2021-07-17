@@ -12,28 +12,68 @@ export const defaultUser = {
   photoURL: '/static/mock-images/avatars/avatar_default.jpg'
 }
 
+const cardStyle = {
+  backgroundColor: '#d5e7f5',
+  flexGrow: 1,
+  boxShadow: 10,
+  borderRadius: 10,
+  paddingLeft: 20,
+  paddingRight: 20,
+  paddingTop: 20,
+  paddingBottom: 20,
+  margin: 10,
+  minHeight: 815,
+  minWidth: 300,
+}
+
+const labelStyle = {
+  color: '#4C4C4C', 
+  fontWeight: 'bold'
+}
+
+const titleStyle = {
+  color: '#4C4C4C', fontSize: 20, marginBottom: 10,
+}
+
 export const boardData = {
   lanes: [
     {
-      id: 'to_do',
-      title: 'To-do',
-      label: '2/2',
+      id: 0,
+      title: 'To-Do',
+      label: '12/12',
+      style: cardStyle,
+      titleStyle: titleStyle,
+      labelStyle: labelStyle,
       cards: [
-        {id: 0, title: 'Write Blog', description: 'Can AI make memes', label: '30 mins' },
-        {id: 1, title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins'}
+        {
+          title: 'test',
+          description: 'yeet',
+          label: 'xdxd',
+          status: 'complete',
+          mentee_id: 1,
+          project_id: 2,
+          cardColor: '#BD3B36',
+          cardStyle: {borderRadius: 6, boxShadow: '0 0 6px 1px #BD3B36', marginBottom: 15},
+          metadata: {id: 'Card1'},
+          tags: [{title: 'Critical', color: 'white', bgcolor: 'red'}, {title: '2d ETA', color: 'white', bgcolor: '#0079BF'}]
+        },
       ]
     },
     {
-      id: 'in_progress',
+      id: 1,
       title: 'In Progress',
-      label: '0/0',
-      cards: []
+      cards: [],
+      style: cardStyle,
+      titleStyle: titleStyle,
+      labelStyle: labelStyle,
     },
     {
-      id: 'complete',
-      title: 'Completed',
-      label: '0/0',
-      cards: []
+      id: 2,
+      title: 'Complete',
+      cards: [],
+      style: cardStyle,
+      titleStyle: titleStyle,
+      labelStyle: labelStyle,
     },
   ]
 }
