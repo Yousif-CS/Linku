@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { HasOne } from '@ioc:Adonis/Lucid/Orm'
 import User from 'App/Models/User'
 
@@ -16,8 +16,8 @@ export default class Mentor extends BaseModel {
   @column()
   public user_id: number
 
-  @hasOne(() => User, {
-    localKey: 'user_id',
+  @belongsTo(() => User, {
+    foreignKey: 'user_id',
   })
-  public user: HasOne<typeof User>
+  public user: BelongsTo<typeof User>
 }

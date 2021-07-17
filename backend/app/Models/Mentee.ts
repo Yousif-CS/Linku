@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
-import { HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import User from 'App/Models/User'
 import Project from 'App/Models/Project'
 
@@ -17,13 +16,13 @@ export default class Mentee extends BaseModel {
   @column()
   public user_id: number
 
-  @hasOne(() => User, {
-    localKey: 'user_id',
+  @belongsTo(() => User, {
+    foreignKey: 'user_id',
   })
-  public user: HasOne<typeof User>
+  public user: BelongsTo<typeof User>
 
-  @hasOne(() => Project, {
-    localKey: 'project_id',
+  @belongsTo(() => Project, {
+    foreignKey: 'project_id',
   })
-  public project: HasOne<typeof Project>
+  public project: BelongsTo<typeof Project>
 }

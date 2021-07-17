@@ -4,6 +4,8 @@ import Mentor from 'App/Models/Mentor'
 import MenteeCreateValidator from 'App/Validators/MenteeCreateValidator'
 import MentorCreateValidator from 'App/Validators/MentorCreateValidator'
 import User from 'App/Models/User'
+import Industries from 'Database/migrations/1626487266183_industries'
+import Industry from 'App/Models/Industry'
 
 export default class RegistrationsController {
   public async mentee({ request, response }: HttpContextContract) {
@@ -11,7 +13,10 @@ export default class RegistrationsController {
 
     const user = await User.create(input)
 
-    await Mentee.create({ user_id: user.id })
+    const mentee = await Mentee.create({ user_id: user.id })
+    const industry = await Industry.findOrFail(input.industry_id)
+    await mentee.related('user').associate(user)
+    await user.related('industry').associate(industry)
 
     return response.created()
   }
@@ -21,7 +26,10 @@ export default class RegistrationsController {
 
     const user = await User.create(input)
 
-    await Mentor.create({ user_id: user.id })
+    const mentor = await Mentor.create({ user_id: user.id })
+    const industry = await Industry.findOrFail(input.industry_id)
+    await mentor.related('user').associate(user)
+    await user.related('industry').associate(industry)
 
     return response.created()
   }

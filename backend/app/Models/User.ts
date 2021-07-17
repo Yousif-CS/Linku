@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasOne } from '@ioc:Adonis/Lucid/Orm'
-import { HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, belongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import Industry from 'App/Models/Industry'
 
 export default class User extends BaseModel {
@@ -48,8 +48,8 @@ export default class User extends BaseModel {
   @column()
   public industry_id: number
 
-  @hasOne(() => Industry, {
-    localKey: 'industry_id',
+  @belongsTo(() => Industry, {
+    foreignKey: 'industry_id',
   })
-  public industry: HasOne<typeof Industry>
+  public industry: BelongsTo<typeof Industry>
 }

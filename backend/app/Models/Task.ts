@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Project from 'App/Models/Project'
 import Mentee from 'App/Models/Mentee'
 export default class Task extends BaseModel {
@@ -30,9 +30,9 @@ export default class Task extends BaseModel {
   @column()
   public project_id: number
 
-  @hasOne(() => Project)
-  public project: HasOne<typeof Project>
+  @belongsTo(() => Project)
+  public project: BelongsTo<typeof Project>
 
-  @hasOne(() => Mentee)
-  public mentee: HasOne<typeof Mentee>
+  @belongsTo(() => Mentee)
+  public mentee: BelongsTo<typeof Mentee>
 }
