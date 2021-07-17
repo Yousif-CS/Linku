@@ -35,7 +35,14 @@ export default class TasksController {
 
   public async getTask({ auth, params }) {
     await auth.use('api').authenticate()
-    const task = Task.findOrFail(params.id)
+    const task = await Task.findOrFail(params.id)
     return task
+  }
+
+  public async deleteTask({ auth, params, response}) {
+    await auth.use('api').authenticate()
+    const task = await Task.findOrFail(params.id)
+    await task.delete()
+    return response.ok()
   }
 }
