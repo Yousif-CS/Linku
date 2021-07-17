@@ -20,9 +20,11 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.post('/project/create', 'ProjectController.postProject')
-Route.post('/task/create', 'TaskController.postTask')
-Route.post('/register/mentor', 'RegisterationsController.mentor')
-Route.post('/register/mentee', 'RegisterationsController.mentee')
+Route.post('/project/:id', 'ProjectController.postProject')
+Route.post('/task/:id', 'TaskController.postTask')
+Route.put('/task/:id', 'TaskController.putTask')
+Route.get('/task/:id', 'TaskController.getTask')
+Route.post('/register/mentor', 'RegistrationsController.mentor')
+Route.post('/register/mentee', 'RegistrationsController.mentee')
 Route.post('/login', 'AuthController.create')
 Route.post('/logout', 'AuthController.destroy')
