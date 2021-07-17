@@ -16,6 +16,9 @@ export default class Mentee extends BaseModel {
   @column()
   public user_id: number
 
+  @column()
+  public project_id: number
+
   @belongsTo(() => User, {
     foreignKey: 'user_id',
   })

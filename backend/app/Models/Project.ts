@@ -39,9 +39,13 @@ export default class Project extends BaseModel {
   })
   public mentor: BelongsTo<typeof Mentor>
 
-  @hasMany(() => Mentee)
+  @hasMany(() => Mentee, {
+    foreignKey: 'project_id',
+  })
   public mentees: HasMany<typeof Mentee>
 
-  @hasMany(() => Task)
+  @hasMany(() => Task, {
+    foreignKey: 'project_id',
+  })
   public tasks: HasMany<typeof Task>
 }
