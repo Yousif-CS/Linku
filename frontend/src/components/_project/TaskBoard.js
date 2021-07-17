@@ -6,13 +6,13 @@ import { Container, Stack, Typography } from '@material-ui/core';
 import Board from 'react-trello';
 import { AppContext } from '../../utils/Store';
 import { CustomCard } from './CustomCard';
-import NewCardForm from './CustomCreateCard';
+import CreateCustomCard from './CustomCreateCard';
 import './Board.css'
 // ----------------------------------------------------------------------
 
 const components = {
   card: CustomCard,
-  NewCardForm: NewCardForm,
+  NewCardForm: CreateCustomCard,
 }
 
 export default function TaskBoard() {
