@@ -1,10 +1,6 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import {
-  column,
-  beforeSave,
-  BaseModel,
-} from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
 
 export default class auth extends BaseModel {
   @column({ isPrimary: true })
@@ -26,7 +22,7 @@ export default class auth extends BaseModel {
   public updatedAt: DateTime
 
   @beforeSave()
-  public static async hashPassword (auth: auth) {
+  public static async hashPassword(auth: auth) {
     if (auth.$dirty.password) {
       auth.password = await Hash.make(auth.password)
     }

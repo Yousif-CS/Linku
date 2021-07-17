@@ -14,7 +14,7 @@ export default class TaskValidator {
     description: schema.string.optional({ trim: true, escape: true }),
     label: schema.enum.optional(Object.values(TaskStatus)),
     mentee_id: schema.number([rules.exists({ table: 'mentees', column: 'id' })]),
-    project_id: schema.number([rules.exists({ table: 'project', column: 'id' })]),
+    project_id: schema.number([rules.exists({ table: 'projects', column: 'id' })]),
   })
 
   public messages = {
