@@ -11,7 +11,7 @@ export default class ProjectValidator {
     name: schema.string({ trim: true, escape: true }, [rules.required()]),
     description: schema.string({ trim: true, escape: true }, [rules.required()]),
     end_date: schema.date.optional(),
-    mentor_id: schema.number([rules.exists({ table: 'mentors', column: 'id' })]),
+    user_id: schema.number([rules.exists({ table: 'mentors', column: 'id' })]),
   })
 
   public messages = {

@@ -4,9 +4,11 @@
  * Feel free to let us know via PR, if you find something broken in this config
  * file.
  */
-
+import User from 'App/Models/User'
 import Bouncer from '@ioc:Adonis/Addons/Bouncer'
-
+import Mentor from 'App/Models/Mentor'
+import Project from 'App/Models/Project'
+import Mentee from 'App/Models/Mentee'
 /*
 |--------------------------------------------------------------------------
 | Bouncer Actions
@@ -29,7 +31,34 @@ import Bouncer from '@ioc:Adonis/Addons/Bouncer'
 | NOTE: Always export the "actions" const from this file
 |****************************************************************
 */
-export const { actions } = Bouncer
+export const { actions } = Bouncer.define('isMentor', async (user: User) => {
+  const mentor = await Mentor.query().preload('user', (query) => {
+    query.where('users.id', user.id)
+  })
+  return mentor.length > 0
+}).define('viewProject', async (user: User) => {
+  const mentor = await Mentor.query().preload('user', (query) => {
+    query.where('users.id', user.id)
+  })
+  if (mentor.length === 0) {
+    // if not a mentor then mentee
+    const mentee = await Mentee.query().preload('user', (query) => {
+      query.where('users.id', user.id)
+    })
+
+    // Is mentee a participant in the project?
+    const project = await mentee[0].related('project').query()
+    if (!project) return false
+  }
+
+  const project = await Project.query().preload('mentor', (query) => {
+    query.where('projects.mentor_id', mentor[0].id)
+  })
+  // Is mentor a participant in the project
+  if (project.length === 0) return false
+
+  return true
+})
 
 /*
 |--------------------------------------------------------------------------
