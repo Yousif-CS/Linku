@@ -47,7 +47,14 @@ export default class ProjectsController {
     }
 
     // Create a project
-    const newProject = await Project.create(input)
+    const projectInfo = {
+      name: input.name,
+      description: input.description,
+      end_date: input.end_date,
+      mentor_id: mentor[0].id,
+    }
+
+    const newProject = await Project.create(projectInfo)
 
     // Attach the project to mentee
     await mentee.related('project').associate(newProject)
