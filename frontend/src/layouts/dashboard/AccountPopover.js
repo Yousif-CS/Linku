@@ -11,8 +11,8 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 // components
 import MenuPopover from '../../components/MenuPopover';
 //
-import { AppContext } from '../../utils/Store';
-
+import { AppContext, defaultUser } from '../../utils/Store';
+import {useNavigate} from 'react-router-dom';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -39,13 +39,19 @@ export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const user = React.useContext(AppContext).user;
-
+  const setUser = React.useContext(AppContext).setUser;
+  const navigate = useNavigate();
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  
+  const logout = () => {
+    setUser(defaultUser);
+    navigate('/');
+  }
 
   return (
     <>
@@ -112,7 +118,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button fullWidth color="inherit" variant="outlined" onClick={() => {logout()}}>
             Logout
           </Button>
         </Box>

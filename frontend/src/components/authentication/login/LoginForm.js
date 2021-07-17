@@ -46,18 +46,19 @@ export default function LoginForm() {
         },
         );
         const data = response.data;
-        let tempUser = user;
-        tempUser.tempUser_id = data.id;
-        tempUser.tempUsername = data.email;
+        let tempUser = {...user};
+        tempUser.user_id = data.id;
+        tempUser.username = data.email;
         tempUser.first_name = data.first_name;
         tempUser.last_name = data.last_name;
         tempUser.email = data.email;
         tempUser.token = data.token;
         tempUser.role = (data.is_mentor ? 'mentor' : 'mentee');
         tempUser.industry = data.industry;
-        tempUser.compnay = data.company;
+        tempUser.company = data.company;
         setUser(tempUser);
         console.log(response);
+        console.log(user);
         alert('Successful login! Redirecting you to the home page...');
         navigate('/');
     } catch (e) {

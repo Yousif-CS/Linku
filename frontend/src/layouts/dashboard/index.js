@@ -5,7 +5,9 @@ import { experimentalStyled as styled } from '@material-ui/core/styles';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
-
+import { Navigate, useRoutes } from 'react-router-dom';
+import React from 'react';
+import { AppContext } from '../../utils/Store';
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
@@ -34,7 +36,13 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
-
+  const user = React.useContext(AppContext).user;
+  if (user.token === '') {
+      return (
+          <Navigate to='/' />
+      );
+  }
+  
   return (
     <RootStyle>
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
