@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasOne} from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import { HasOne } from '@ioc:Adonis/Lucid/Orm'
 import Industry from 'App/Models/Industry'
 
@@ -39,9 +39,11 @@ export default class User extends BaseModel {
   @column()
   public role: string
 
+  @column()
+  public industry_id: number
+
   @hasOne(() => Industry, {
-    foreignKey: 'industry_id',
-    localKey: 'id',
+    localKey: 'industry_id',
   })
-  public industry_id: HasOne<typeof Industry>
+  public industry: HasOne<typeof Industry>
 }

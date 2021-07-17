@@ -10,7 +10,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
       table.string('phone').notNullable()
-      table.integer('industry_id').references('id').inTable('industry').notNullable()
+      table.integer('industry_id').references('id').inTable('industries').notNullable()
       table.string('company').notNullable()
       table.string('role').notNullable()
 
