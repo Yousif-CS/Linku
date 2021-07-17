@@ -55,6 +55,7 @@
     "react-helmet-async": "^1.0.9",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "4.0.0",
+    "react-trello": "^2.2.11",
     "simplebar": "^5.3.4",
     "simplebar-react": "^2.3.4",
     "web-vitals": "^2.0.1",
