@@ -56,6 +56,8 @@ export default function RegisterForm() {
     } catch (e) {
         alert(e);
         alert(e.reponse);
+        console.log(e.response.data);
+        // alert(e.response.data.errors[0].title);
     }
   };
 

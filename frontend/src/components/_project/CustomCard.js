@@ -1,8 +1,6 @@
 import React from 'react';
 import { MovableCardWrapper } from 'react-trello';
 import DeleteButton from 'react-trello';
-
-import Board from 'react-trello';
 import Tag from 'react-trello';
 import { AppContext } from '../../utils/Store';
 
