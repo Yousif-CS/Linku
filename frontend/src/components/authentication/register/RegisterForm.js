@@ -39,7 +39,8 @@ export default function RegisterForm() {
     }
     
     try {
-        const response = await axios.post(baseURL() + '/register/' + mentee ? "/mentee" : "/mentor",
+        const type = (mentee ? "/mentee" : "/mentor");
+        const response = await axios.post(`${baseURL()}/register${type}`,
         {
             first_name: firstName,
             last_name: lastName,
