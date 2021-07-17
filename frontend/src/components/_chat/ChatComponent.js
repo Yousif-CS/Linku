@@ -2,9 +2,9 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import { useRef, useState } from 'react';
 import { experimentalStyled } from '@material-ui/core/styles';
-import { Paper, TextField, Typography, IconButton } from '@material-ui/core';
+import { Paper, TextField, IconButton } from '@material-ui/core';
 import { AppContext } from '../../utils/Store';
-import checkCircle from '@iconify/icons-ant-design/check-circle-outlined';
+import chatHead from '@iconify/icons-ant-design/aliwangwang-filled';
 import { makeStyles } from '@material-ui/styles';
 import SenderMessage from './SenderMessage';
 import MyMessage from './MyMessage';
@@ -86,21 +86,19 @@ export default function ChatComponent() {
         onClick={handleChat}
       >
         <IconWrapperStyle>
-          <Icon icon={checkCircle} width={24} height={24} />
+          <Icon icon={chatHead} width={24} height={24} />
         </IconWrapperStyle>
       </IconButton>
       {
         open ? 
         <>
         <Paper elevation={5} className={classes.blep}>
-          {rep.map((msg) => <SenderMessage message={msg} />)}
-          {send.map((msg) => <MyMessage className={classes.help} message={msg}>msg.message</MyMessage>)}
-          <TextField variant="filled" color="secondary" InputProps={{
-            className: classes.input,
-          }} className={classes.textBar} id="standard-textarea" placeholder="Start typing..." />
-        </Paper>
-        
-        
+            {rep.map((msg) => <SenderMessage message={msg} />)}
+            {send.map((msg) => <MyMessage className={classes.help} message={msg}>msg.message</MyMessage>)}
+            <TextField variant="filled" color="secondary" InputProps={{
+              className: classes.input,
+            }} className={classes.textBar} id="standard-textarea" placeholder="Start typing..." />
+          </Paper>
         </>
         : null
       }
