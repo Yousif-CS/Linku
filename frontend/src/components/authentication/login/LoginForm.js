@@ -53,7 +53,7 @@ export default function LoginForm() {
         tempUser.last_name = data.last_name;
         tempUser.email = data.email;
         tempUser.token = data.token;
-        tempUser.role = (data.is_mentor ? 'mentor' : 'mentee');
+        tempUser.role = (data.is_mentor ? 'Industry Mentor' : 'Mentee (High-school student)');
         tempUser.industry = data.industry;
         tempUser.company = data.company;
         setUser(tempUser);
