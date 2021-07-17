@@ -11,12 +11,16 @@ import { LoadingButton, Autocomplete } from '@material-ui/lab';
 import React from 'react';
 import companies from '../../../utils/companies';
 import industries from '../../../utils/industries';
+import baseURL from '../../../utils/baseURL';
+import axios from 'axios';
+import { AppContext } from '../../../utils/Store';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const user = React.useContext(AppContext).user;
   
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
@@ -27,9 +31,36 @@ export default function RegisterForm() {
   const [industry, setIndustry] = React.useState('');
   const [company, setCompany] = React.useState('');
   
-  const submit = () => {
-    return;
-  }
+  const registerUser = async () => {
+    if (email === '' || password === '' || firstName === '' || lastName === '' || phone === '') {
+        // TODO fancy error
+        alert('A field below is empty!');
+        return;
+    }
+    
+    try {
+        const response = await axios.post(baseURL() + '/register/' + mentee ? "/mentee" : "/mentor",
+        {
+            first_name: firstName,
+            last_name: lastName,
+            password: password,
+            email: email,
+            industry: industry,
+            phone: phone,
+            company: company,
+            role: '',
+        },
+        );
+        alert('Successful registration!');
+        console.log(response);
+        console.log(user);
+        // history.push('/register-2');
+    } catch (e) {
+        alert(e);
+        alert(e.reponse);
+        alert(e.response.data.errors[0].title);
+    }
+  };
 
   return (
     <Stack spacing={3}>
@@ -110,7 +141,7 @@ export default function RegisterForm() {
         size="large"
         type="submit"
         variant="contained"
-        onClick={() => submit()}
+        onClick={() => registerUser()}
       >
         Register
       </LoadingButton>
