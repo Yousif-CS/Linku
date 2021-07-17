@@ -1,5 +1,9 @@
 const industries = () => {
-    return ['Accounting', 'Law Practice', 'Computer Software'];
+    return {
+        'Law Practice': 73,
+        'Computer Software': 25,
+        'Accounting': 1
+        };
 }
 
 export default industries;

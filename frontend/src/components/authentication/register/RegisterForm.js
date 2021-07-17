@@ -14,7 +14,6 @@ import industries from '../../../utils/industries';
 import baseURL from '../../../utils/baseURL';
 import axios from 'axios';
 import { AppContext } from '../../../utils/Store';
-
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -46,16 +45,14 @@ export default function RegisterForm() {
             last_name: lastName,
             password: password,
             email: email,
-            industry: industry,
+            industry_id: industries()[industry],
             phone: phone,
             company: company,
-            role: '',
+            role: 'deezNutz',
         },
         );
-        alert('Successful registration!');
-        console.log(response);
-        console.log(user);
-        // history.push('/register-2');
+        alert('Successful registration! Redirecting you to login...');
+        navigate('/login');
     } catch (e) {
         alert(e);
         alert(e.reponse);
@@ -122,7 +119,7 @@ export default function RegisterForm() {
     />
       
       <Autocomplete 
-        options={industries()}
+        options={Object.keys(industries())}
         fullWidth
         onChange={ (event, value, reason) => {setIndustry(value)} }
         value={industry}
