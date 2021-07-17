@@ -33,7 +33,8 @@ const useStyles = makeStyles({
     padding: '50px',
   },
   container: {
-    paddingTop: '150px'
+    paddingTop: '150px',
+    paddingBottom: '100px',
   },
   text: {
       textAlign: 'center',
@@ -114,6 +115,7 @@ export default function Home() {
               <Typography gutterBottom variant="subtitle1" sx={{ opacity: 0.72 }}>
                 who have experience in your industries and companies of interest.
               </Typography>
+              <br></br>
               <Typography variant="subtitle1" sx={{ opacity: 0.72 }}>
                 Get exposure to what industry is really like, find out what you want to do, get tips for uni, and build lasting connections on LinkU.
               </Typography>

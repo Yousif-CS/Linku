@@ -13,10 +13,11 @@ import { Box, Grid, Container, Typography, Card, Stack, Link, Button} from '@mat
 
 const useStyles = makeStyles({
   appbar: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(255, 255, 255, 0.61)',
     height: '100px',
     paddingTop: '15px',
     boxShadow: 'none',
+    backdropFilter: 'blur(5px)',
   },
   buttons: {
     marginLeft: '20px',
@@ -58,7 +59,7 @@ export default function LogoOnlyLayout() {
   
   return (
   <>
-    <AppBar title={<Logo />} className={classes.appbar} boxShadow={0}>
+    <AppBar title={<Logo />} className={classes.appbar} >
     <Toolbar>
       <Box display='flex' flexGrow={1}>
       <RouterLink to="/">
