@@ -4,6 +4,7 @@ import {
   BelongsTo,
   belongsTo,
   column,
+  HasOne,
   HasMany,
   hasMany,
   hasOne,
@@ -11,6 +12,7 @@ import {
 import Mentor from './Mentor'
 import Task from './Task'
 import Mentee from './Mentee'
+import Chat from './Chat'
 
 export default class Project extends BaseModel {
   @column({ isPrimary: true })
@@ -38,6 +40,9 @@ export default class Project extends BaseModel {
     foreignKey: 'mentor_id',
   })
   public mentor: BelongsTo<typeof Mentor>
+
+  @hasOne(() => Chat)
+  public chat: HasOne<typeof Chat>
 
   @hasMany(() => Mentee, {
     foreignKey: 'project_id',

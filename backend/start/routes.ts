@@ -22,6 +22,9 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.post('/project/', 'ProjectsController.post')
 Route.get('/project/:id', 'ProjectsController.get')
+Route.post('/chats', 'ChatsController.post')
+Route.get('/chats/:id', 'ChatsController.get')
+
 Route.post('/task/', 'TasksController.postTask')
 Route.put('/task/:id', 'TasksController.putTask')
 Route.get('/task/:id', 'TasksController.getTask')
