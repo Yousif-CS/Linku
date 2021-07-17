@@ -13,7 +13,7 @@ export default class TaskValidator {
     title: schema.string({ trim: true, escape: true }, [rules.required()]),
     description: schema.string.optional({ trim: true, escape: true }),
     label: schema.enum.optional(Object.values(TaskStatus)),
-    mentor_id: schema.number([rules.exists({ table: 'mentors', column: 'id' })]),
+    mentee_id: schema.number([rules.exists({ table: 'mentees', column: 'id' })]),
     project_id: schema.number([rules.exists({ table: 'project', column: 'id' })]),
   })
 

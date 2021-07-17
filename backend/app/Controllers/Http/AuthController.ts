@@ -9,7 +9,7 @@ export default class AuthController {
    * Create a token for login
    */
   public async create({ auth, request, response }) {
-    const input = await request.validate(this.createValidator)
+    const input = await request.validate(AuthCreateValidator)
 
     const email = input.email
     const password = input.password
