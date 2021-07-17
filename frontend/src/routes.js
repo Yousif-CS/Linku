@@ -10,6 +10,7 @@ import Project from './pages/Project';
 import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
+import Profile from './pages/Profile';
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +24,8 @@ export default function Router() {
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
         { path: 'project', element: <Project /> },
-        { path: 'blog', element: <Blog /> }
+        { path: 'blog', element: <Blog /> },
+        { path: 'profile', element: <Profile />},
       ]
     },
     {

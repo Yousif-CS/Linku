@@ -25,7 +25,7 @@ export default function Blog() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Blog
+            Find out more about your different pathways!
           </Typography>
           <Button
             variant="contained"
