@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import Board from 'react-trello'
 import { TextField, Button } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import './Board.css';
 
 class CreateCustomCard extends Component {
   handleAdd = () => this.props.onAdd({
@@ -9,28 +8,26 @@ class CreateCustomCard extends Component {
     description: this.descRef.value, 
     label: this.label.value})
   
-  setTitleRef = (ref) => this.titleRef = ref
-  setDescRef = (ref) => this.descRef = ref
-  setLabelRef = (ref) => this.label = ref
+  setTitle = (ref) => this.titleRef = ref
+  setDescription = (ref) => this.descRef = ref
+  setLabel = (ref) => this.label = ref
 
   render() {
   const {onCancel} = this.props
   return (
-   <div style={{background: 'white', borderRadius: 3, border: '1px solid #eee', borderBottom: '1px solid #ccc'}}>
-    <div style={{padding: 5, margin: 5}}>
-      <div style={{marginBottom: 3}}>
-        <TextField inputRef={this.setDescRef} id="standard-textarea" placeholder="Set title..." />
+   <div className={addTask}>
+      <div className={addTaskContainer}>
+        <TextField inputRef={this.setTitle} id="standard-textarea" placeholder="Set title..." />
       </div>
-      <div style={{marginBottom: 3}}>
-        <TextField inputRef={this.setDescRef} id="standard-textarea" placeholder="Set description..." />
+      <div className={addTaskContainer}>
+        <TextField inputRef={this.setDescription} id="standard-textarea" placeholder="Set description..." />
       </div>
-      <div style={{marginBottom: 3}}>
-        <TextField inputRef={this.setLabelRef} id="standard-textarea" placeholder="Set label..." />
+      <div className={addTaskContainer}>
+        <TextField inputRef={this.setLabel} id="standard-textarea" placeholder="Set label..." />
       </div>
       <Button variant="contained" color="primary" onClick={this.handleAdd}>Add</Button>
       <Button variant="contained" color="secondary" onClick={onCancel}>Cancel</Button>
     </div>
-  </div>
     ) 
   }
 }

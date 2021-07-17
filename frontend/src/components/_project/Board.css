@@ -7,3 +7,15 @@
     align-items: stretch !important;
     flex-grow: 1 !important;
 }
+
+.addTask {
+    background: '#FFFFFF';
+    border: '1px solid #eee';
+    border-bottom: '1px solid #ccc';
+    padding: 5px;
+    margin: 5px;
+}
+
+.addTaskContainer {
+    margin-bottom: 3px;
+}

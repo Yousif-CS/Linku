@@ -6,21 +6,38 @@ import { Paper, TextField, Typography, IconButton } from '@material-ui/core';
 import { AppContext } from '../../utils/Store';
 import checkCircle from '@iconify/icons-ant-design/check-circle-outlined';
 import { makeStyles } from '@material-ui/styles';
+import SenderMessage from './SenderMessage';
+import MyMessage from './MyMessage';
+import './Chat.css';
 
 const useStyles = makeStyles(() => ({
-  blep : {
+  blep: {
     position: 'fixed',
     bottom: '6.5em',
     right: '4.5em',
     height: '30em',
     width: '30em',
-    padding: '2em',
+    paddingLeft: '2em',
+    paddingTop: '2em',
+    paddingBottom: '4em',
+    border: '1px solid #eee',
+    overflow: 'auto',
   },
   
   textBar: {
     position: 'fixed',
     bottom: '7em',
-    right: '20em',
+    right: '10em',
+    width: '24em'
+  },
+
+  input : {
+    zIndex: 5,
+  },
+
+  help: {
+    margin: '20em',
+    paddingLeft: '10px'
   }
 }));
 
@@ -44,6 +61,16 @@ export default function ChatComponent() {
   const rep = [
     {message: 'hi'},
     {message: 'xd'},
+    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
+    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
+    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'}
+  ]
+
+  const send = [
+    {message: 'hi'},
+    {message: 'xd'},
+    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
+    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
     {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'}
   ]
 
@@ -64,10 +91,17 @@ export default function ChatComponent() {
       </IconButton>
       {
         open ? 
-        <Paper elevation={3} className={classes.blep}>
-          {rep.map((msg) => <div>{msg.message}</div>)}
-          <TextField className={classes.textBar} id="standard-textarea" label="Send a message" placeholder="Start typing..." />
+        <>
+        <Paper elevation={5} className={classes.blep}>
+          {rep.map((msg) => <SenderMessage message={msg} />)}
+          {send.map((msg) => <MyMessage className={classes.help} message={msg}>msg.message</MyMessage>)}
+          <TextField variant="filled" color="secondary" InputProps={{
+            className: classes.input,
+          }} className={classes.textBar} id="standard-textarea" placeholder="Start typing..." />
         </Paper>
+        
+        
+        </>
         : null
       }
     </>
