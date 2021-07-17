@@ -4,7 +4,6 @@ import Mentor from 'App/Models/Mentor'
 import MenteeCreateValidator from 'App/Validators/MenteeCreateValidator'
 import MentorCreateValidator from 'App/Validators/MentorCreateValidator'
 import User from 'App/Models/User'
-import Industries from 'Database/migrations/1626487266183_industries'
 import Industry from 'App/Models/Industry'
 
 export default class RegistrationsController {

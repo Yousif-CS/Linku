@@ -7,8 +7,10 @@ export default class TasksController {
   public async postTask({ auth, request, response }) {
     await auth.use('api').authenticate()
     const input = await request.validate(TaskValidator)
-    const newProject = await Task.create(input)
-    return response.created(newProject)
+    const newTask = await Task.create(input)
+
+    const task = await Task.find(newTask.id)
+    return response.created(task)
   }
 
   public async putTask({ auth, request, params, response }) {
@@ -28,10 +30,10 @@ export default class TasksController {
       task.mentee_id = input.mentee_id
     }
     await task.save()
-    return response.status(200)
+    return response.ok()
   }
 
-  public async getTask({ auth, params, response }) {
+  public async getTask({ auth, params }) {
     await auth.use('api').authenticate()
     const task = Task.findOrFail(params.id)
     return task
