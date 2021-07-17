@@ -16,88 +16,99 @@ import {
   FormControlLabel
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
+import axios from 'axios';
+import baseURL from '../../../utils/baseURL';
+import { AppContext } from '../../../utils/Store';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-      remember: true
-    },
-    validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const user = React.useContext(AppContext).user;
+  const setUser = React.useContext(AppContext).setUser;
+  
+  const loginUser = async () => {
+    if (email === '' || password === '') {
+        // TODO fancy error
+        alert('A field below is empty!');
+        return;
     }
-  });
+    
+    try {
+        const response = await axios.post(`${baseURL()}/login`,
+        {
+            password: password,
+            email: email,
+        },
+        );
+        const data = response.data;
+        let tempUser = user;
+        tempUser.tempUser_id = data.id;
+        tempUser.tempUsername = data.email;
+        tempUser.first_name = data.first_name;
+        tempUser.last_name = data.last_name;
+        tempUser.email = data.email;
+        tempUser.token = data.token;
+        tempUser.role = (data.is_mentor ? 'mentor' : 'mentee');
+        tempUser.industry = data.industry;
+        tempUser.compnay = data.company;
+        setUser(tempUser);
+        console.log(response);
+        alert('Successful login! Redirecting you to the home page...');
+        navigate('/');
+    } catch (e) {
+        alert(e);
+        alert(e.reponse);
+        alert(e.response.data.errors[0].title);
+    }
+  };
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
 
-  const handleShowPassword = () => {
+const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
 
   return (
-    <FormikProvider value={formik}>
-      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack spacing={3}>
-          <TextField
-            fullWidth
-            autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
-
-          <TextField
-            fullWidth
-            autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
-        </Stack>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-          <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
-            label="Remember me"
-          />
-
-        </Stack>
-
+      <Stack spacing={3}>
+        <TextField
+          fullWidth
+          autoComplete="username"
+          type="email"
+          label="Email address"
+          value={email}
+          onChange={(e) => {setEmail(e.target.value)}}
+        />
+  
+        <TextField
+          fullWidth
+          autoComplete="current-password"
+          type={showPassword ? 'text' : 'password'}
+          label="Password"
+          value={password}
+          onChange={(e) => {setPassword(e.target.value)}}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleShowPassword} edge="end">
+                  <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
         <LoadingButton
           fullWidth
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
+          onClick={() => {loginUser()}}
         >
           Login
         </LoadingButton>
-      </Form>
-    </FormikProvider>
+      </Stack>
   );
 }

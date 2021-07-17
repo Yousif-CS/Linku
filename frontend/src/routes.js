@@ -10,8 +10,9 @@ import Project from './pages/Project';
 import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
+import AccessDenied from './pages/AccessDenied';
 import Profile from './pages/Profile';
-
+import Home from './pages/Home';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -34,8 +35,9 @@ export default function Router() {
       children: [
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
+        { path: 'accessDenied', element: <AccessDenied /> },
         { path: '404', element: <NotFound /> },
-        { path: '/', element: <Navigate to="/dashboard" /> },
+        { path: '/', element: <Home /> },
         { path: '*', element: <Navigate to="/404" /> }
       ]
     },

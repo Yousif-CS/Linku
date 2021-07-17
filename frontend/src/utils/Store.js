@@ -7,9 +7,11 @@ export const defaultUser = {
   last_name: 'test last name',
   email: 'test@test.com',
   token: '',
-  role: 'student',
+  role: '',
   socket_token: '',
-  photoURL: '/static/mock-images/avatars/avatar_default.jpg'
+  photoURL: '/static/mock-images/avatars/avatar_default.jpg',
+  industry: {},
+  company: '',
 }
 
 const cardStyle = {
