@@ -4,8 +4,6 @@ import { Container, Stack, Typography } from '@material-ui/core';
 // components
 import Page from '../components/Page';
 import TaskBoard from '../components/_project/TaskBoard';
-//
-import Board from 'react-trello';
 import { AppContext } from '../utils/Store';
 
 // ----------------------------------------------------------------------

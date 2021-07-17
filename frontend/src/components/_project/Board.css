@@ -1,0 +1,9 @@
+.boardContainer {
+    background-color: #FFFFFF !important;
+    border-radius: 10px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    align-items: stretch !important;
+    flex-grow: 1 !important;
+}

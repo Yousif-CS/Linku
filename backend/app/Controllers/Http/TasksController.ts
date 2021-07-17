@@ -11,11 +11,11 @@ export default class TasksController {
     return response.created(newProject)
   }
 
-  public async putTask({ auth, request, response }) {
+  public async putTask({ auth, request, params, response }) {
     await auth.use('api').authenticate()
     const input = await request.validate(TaskValidator)
-    const task = await Task.findOrFail(request.param('id'))
-    if (input.tite) {
+    const task = await Task.findOrFail(params.id)
+    if (input.title) {
       task.title = input.title
     }
     if (input.description) {
@@ -31,5 +31,9 @@ export default class TasksController {
     return response.status(200)
   }
 
-  public async getTask({ auth, request, response }) {}
+  public async getTask({ auth, params, response }) {
+    await auth.use('api').authenticate()
+    const task = Task.findOrFail(params.id)
+    return task
+  }
 }

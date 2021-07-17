@@ -6,102 +6,145 @@ import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 import { useNavigate } from 'react-router-dom';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@material-ui/core';
-import { LoadingButton } from '@material-ui/lab';
+import { Stack, TextField, IconButton, InputAdornment, Switch, FormControlLabel } from '@material-ui/core';
+import { LoadingButton, Autocomplete } from '@material-ui/lab';
+import React from 'react';
+import companies from '../../../utils/companies';
+import industries from '../../../utils/industries';
+import baseURL from '../../../utils/baseURL';
+import axios from 'axios';
+import { AppContext } from '../../../utils/Store';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-
-  const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('First name required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    },
-    validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+  const user = React.useContext(AppContext).user;
+  
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [phone, setPhone] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [mentee, setMentee] = React.useState(true);
+  const [industry, setIndustry] = React.useState('');
+  const [company, setCompany] = React.useState('');
+  
+  const registerUser = async () => {
+    if (email === '' || password === '' || firstName === '' || lastName === '' || phone === '') {
+        // TODO fancy error
+        alert('A field below is empty!');
+        return;
     }
-  });
-
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+    
+    try {
+        const response = await axios.post(baseURL() + '/register/' + mentee ? "/mentee" : "/mentor",
+        {
+            first_name: firstName,
+            last_name: lastName,
+            password: password,
+            email: email,
+            industry: industry,
+            phone: phone,
+            company: company,
+            role: '',
+        },
+        );
+        alert('Successful registration!');
+        console.log(response);
+        console.log(user);
+        // history.push('/register-2');
+    } catch (e) {
+        alert(e);
+        alert(e.reponse);
+        alert(e.response.data.errors[0].title);
+    }
+  };
 
   return (
-    <FormikProvider value={formik}>
-      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack spacing={3}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-            <TextField
-              fullWidth
-              label="First name"
-              {...getFieldProps('firstName')}
-              error={Boolean(touched.firstName && errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
-            />
-
-            <TextField
-              fullWidth
-              label="Last name"
-              {...getFieldProps('lastName')}
-              error={Boolean(touched.lastName && errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
-            />
-          </Stack>
-
-          <TextField
-            fullWidth
-            autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
-
-          <TextField
-            fullWidth
-            autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                    <Icon icon={showPassword ? eyeFill : eyeOffFill} />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
-
-          <LoadingButton
-            fullWidth
-            size="large"
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-          >
-            Register
-          </LoadingButton>
-        </Stack>
-      </Form>
-    </FormikProvider>
+    <Stack spacing={3}>
+      <FormControlLabel
+        control={<Switch checked={mentee} onChange={() => {setMentee(!mentee)}} name="mentee" />}
+        label={mentee ? "Mentee (High-school student)" : "Industry Mentor"}
+      />          
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>              
+        <TextField
+          fullWidth
+          label="First name"
+          value={firstName}
+          onChange={(e) => {setFirstName(e.target.value)}}
+        />
+  
+        <TextField
+          fullWidth
+          label="Last name"
+          value={lastName}
+          onChange={(e) => {setLastName(e.target.value)}}
+        />
+      </Stack>
+  
+      <TextField
+        fullWidth
+        autoComplete="username"
+        type="email"
+        label="Email address"
+        value={email}
+        onChange={(e) => {setEmail(e.target.value)}}
+    />
+      
+      <TextField
+        fullWidth
+        autoComplete="phone"
+        type="phone"
+        label="Phone number"
+        value={phone}
+        onChange={(e) => {setPhone(e.target.value)}}
+    />
+      
+      <TextField
+        fullWidth
+        autoComplete="current-password"
+        type={showPassword ? 'text' : 'password'}
+        label="Password"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                <Icon icon={showPassword ? eyeFill : eyeOffFill} />
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+        value={password}
+        onChange={(e) => {setPassword(e.target.value)}}
+    />
+      
+      <Autocomplete 
+        options={industries()}
+        fullWidth
+        onChange={ (event, value, reason) => {setIndustry(value)} }
+        value={industry}
+        renderInput={(params) => <TextField {...params} label={mentee ? "Industry you're interested in (optional)" : "Industry you work in"} />}
+      />
+      
+      <Autocomplete 
+        options={companies()}
+        fullWidth
+        onChange={ (event, value, reason) => {setCompany(value)} }
+        value={company}
+        renderInput={(params) => <TextField {...params} label={mentee ? "Company you're interested in (optional)" : "Company you work at"} />}
+      />
+  
+      <LoadingButton
+        fullWidth
+        size="large"
+        type="submit"
+        variant="contained"
+        onClick={() => registerUser()}
+      >
+        Register
+      </LoadingButton>
+    </Stack>
   );
 }
