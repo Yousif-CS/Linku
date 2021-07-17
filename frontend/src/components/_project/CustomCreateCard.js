@@ -27,7 +27,7 @@ class CreateCustomCard extends Component {
       <div style={{marginBottom: 3}}>
         <TextField inputRef={this.setLabelRef} id="standard-textarea" placeholder="Set label..." />
       </div>
-      <Button classes={classes.button} variant="contained" color="primary" onClick={this.handleAdd}>Add</Button>
+      <Button variant="contained" color="primary" onClick={this.handleAdd}>Add</Button>
       <Button variant="contained" color="secondary" onClick={onCancel}>Cancel</Button>
     </div>
   </div>
