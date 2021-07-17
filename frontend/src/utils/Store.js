@@ -81,23 +81,28 @@ export const boardData = {
 }
 
 const appContextDefaultValue = {
-  user: defaultUser,
-  setUser: () => {},
-  board: boardData,
-  setBoard: () => {},
-};
+    user: defaultUser,
+    setUser: () => {},
+    board: boardData,
+    setBoard: () => {},
+    project: {},
+    setProject: {},
+  };
   
 export const AppContext = React.createContext(appContextDefaultValue);
 
 export const AppProvider = (props) => {
   const [user, setUser] = React.useState(appContextDefaultValue.user);
   const [board, setBoard] = React.useState(appContextDefaultValue.board);
-
+  const [project, setProject] = React.useState(appContextDefaultValue.project);
+  
   const store = {
     user,
     setUser,
     board,
-    setBoard
+    setBoard,
+    project,
+    setProject,
   }
 
   return (

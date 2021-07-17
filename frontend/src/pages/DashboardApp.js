@@ -20,7 +20,8 @@ import {
 import { AppContext } from '../utils/Store';
 import { makeStyles } from '@material-ui/styles/';
 import { LoadingButton } from '@material-ui/lab';
-
+import axios from 'axios';
+import baseURL from '../utils/baseURL';
 
 const useStyles = makeStyles({
   project: {
@@ -45,9 +46,44 @@ const useStyles = makeStyles({
 
 export default function DashboardApp() {
   const user = React.useContext(AppContext).user;
+  const project = React.useContext(AppContext).project;
+  const setProject = React.useContext(AppContext).setProject;
+  
   const classes = useStyles();
   const [projTitle, setProjTitle] = React.useState('');
   const [projDesc, setProjDesc] = React.useState('');
+  
+  const createProject = async () => {
+    if (projTitle === '' || projDesc === '') {
+        // TODO fancy error
+        alert('A field below is empty!');
+        return;
+    }
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` }
+    };
+    
+    const bodyParameters = {
+      name: projTitle,
+      description: projDesc,
+      user_id: user.user_id,
+    };
+    
+    try {
+        const response = await axios.post(`${baseURL()}/project/`,
+        bodyParameters,
+        config,
+        );
+        const data = response.data;
+        
+        console.log(response);
+        alert('We found you a mentee! Redirecting you to the project page...');
+        // navigate('/');
+    } catch (e) {
+        alert(e);
+        alert(e.reponse);
+    }
+  };
   
   const mentor = () => {
     return (
@@ -106,7 +142,7 @@ export default function DashboardApp() {
                     size="large"
                     type="submit"
                     variant="contained"
-                    onClick={() => {loginUser()}}
+                    onClick={() => {createProject()}}
                   >
                     Create a new project and assign me a new mentee
                   </LoadingButton>
@@ -114,7 +150,6 @@ export default function DashboardApp() {
                   </Container>
                 </Card>
               </Grid>
-              
             </Grid>
           </Container>
         </Page>
