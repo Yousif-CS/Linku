@@ -41,7 +41,9 @@ export default class Project extends BaseModel {
   })
   public mentor: BelongsTo<typeof Mentor>
 
-  @hasOne(() => Chat)
+  @hasOne(() => Chat, {
+    foreignKey: 'project_id',
+  })
   public chat: HasOne<typeof Chat>
 
   @hasMany(() => Mentee, {

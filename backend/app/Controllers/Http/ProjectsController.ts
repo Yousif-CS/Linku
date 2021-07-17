@@ -63,9 +63,8 @@ export default class ProjectsController {
     // return the chosen mentee
     await mentee.load('project')
     await mentee.load('user')
-    const modelObj = mentee.toObject()
-    delete modelObj.user.password
-    return modelObj
+
+    return mentee.toJSON()
   }
 
   public async get({ auth, bouncer, request, response }: HttpContextContract) {
@@ -82,6 +81,12 @@ export default class ProjectsController {
     await project.load('tasks')
     await project.load('mentor')
     await project.load('mentees')
-    return response.ok(project)
+    await project.load('chat')
+    await Promise.all(
+      project.mentees.map(async (mentee) => {
+        await mentee.load('user')
+      })
+    )
+    return response.ok(project.toJSON())
   }
 }

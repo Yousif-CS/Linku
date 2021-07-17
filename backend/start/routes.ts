@@ -24,7 +24,7 @@ Route.post('/project/', 'ProjectsController.post')
 Route.get('/project/:id', 'ProjectsController.get')
 Route.post('/chats', 'ChatsController.post')
 Route.get('/chats/:id', 'ChatsController.get')
-
+Route.get('/user/projects', 'UsersController.getProjects')
 Route.post('/task/', 'TasksController.postTask')
 Route.put('/task/:id', 'TasksController.putTask')
 Route.get('/task/:id', 'TasksController.getTask')
