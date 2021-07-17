@@ -1,0 +1,6 @@
+.chatbois {
+    position: fixed;
+    bottom: 3em;
+    right: 4em;
+    z-index: 1;
+}
