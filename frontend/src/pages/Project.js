@@ -25,7 +25,6 @@ export default function Project() {
           justifyContent="flex-end"
           sx={{ mb: 5 }}
         >
-          <p>helo</p>
         </Stack>
         <TaskBoard />
       </Container>

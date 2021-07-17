@@ -83,13 +83,9 @@ export default function Home() {
           <Typography align='center' variant="h2">Connect with people, not profiles</Typography>
         </Box>
         <Card className={classes.bigCard}>
-        <Grid container spacing={3}>
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={6} md={3}>
-            <Card>
-              <Typography>
-              Ttest
-              </Typography>
-            </Card>
+            <AppWeeklySales />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppNewUsers />
@@ -99,6 +95,16 @@ export default function Home() {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBugReports />
+          </Grid>
+          <Grid item xs={12} sm={6} md={8}>
+            <Card>
+            Image
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Card>
+            Statement
+            </Card>
           </Grid>
         </Grid>
         </Card>
