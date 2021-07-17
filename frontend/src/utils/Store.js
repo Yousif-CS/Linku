@@ -19,8 +19,8 @@ export const boardData = {
       title: 'To-do',
       label: '2/2',
       cards: [
-        {id: 0, title: 'Write Blog', description: 'Can AI make memes', label: '30 mins', },
-        {id: 1, title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins', }
+        {id: 0, title: 'Write Blog', description: 'Can AI make memes', label: '30 mins' },
+        {id: 1, title: 'Pay Rent', description: 'Transfer via NEFT', label: '5 mins'}
       ]
     },
     {
