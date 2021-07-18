@@ -90,7 +90,7 @@ export default function Home() {
         </SectionStyle> */}
 
         <Box sx={{ pb: 5 }}>
-          <Typography align='center' variant="h2">Connect with people, not profiles</Typography>
+          <Typography align='center' variant="h2">Connect with people, not profiles.</Typography>
         </Box>
         <Card className={classes.bigCard}>
         <Grid container spacing={4}>
