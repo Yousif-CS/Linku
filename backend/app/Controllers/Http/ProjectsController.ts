@@ -3,7 +3,6 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Project from 'App/Models/Project'
 import ProjectValidator from 'App/Validators/ProjectValidator'
 import Mentee from 'App/Models/Mentee'
-import User from 'App/Models/User'
 import Mentor from 'App/Models/Mentor'
 
 export default class ProjectsController {
