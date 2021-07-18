@@ -36,7 +36,6 @@ export const CreateCustomCard = ({
       const data = response.data;
       console.log(data);
     } catch (e) {
-      alert(e);
       console.log(e);
     }
   }
