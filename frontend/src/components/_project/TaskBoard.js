@@ -23,6 +23,7 @@ export default function TaskBoard() {
   
   return (
     <Board
+      className='boardContainer'
       data={board}
       draggable
       components={components}

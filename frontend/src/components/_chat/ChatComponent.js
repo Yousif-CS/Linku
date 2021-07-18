@@ -59,19 +59,13 @@ export default function ChatComponent() {
   const [open, setOpen] = useState(false);
   const user = React.useContext(AppContext).user;
   const rep = [
-    {message: 'hi'},
-    {message: 'xd'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'}
+    {message: 'Hi'},
+    {message: 'welcome to the platform!'},
+    {message: 'excited for you to learn about PM'},
   ]
 
   const send = [
-    {message: 'hi'},
-    {message: 'xd'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'},
-    {message: 'i am so weak i want to sleep o lord have mercy lord haaave mercy'}
+    {message: 'Hello, likewise! Thanks for embarking on this journey with me.'},
   ]
 
   const classes = useStyles();
