@@ -29,6 +29,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const user = React.useContext(AppContext).user;
   const setUser = React.useContext(AppContext).setUser;
+  const project = React.useContext(AppContext).project;
   const setProject = React.useContext(AppContext).setProject;
   const setTasks = React.useContext(AppContext).setTasks;
   const setMentees = React.useContext(AppContext).setMentees;
@@ -74,10 +75,14 @@ export default function LoginForm() {
       if (data.length == 0) {
         setProject({})
       } else {
+        // setProject({});
+        // console.log(project);
         setProject(data[0]);
         getTasks(token, data[0].id);
       }
-    } catch (e) {
+      alert('Successful login! Redirecting you to the home page...');
+      navigate('/');
+  } catch (e) {
         alert(e);
         alert(e.response);
     }
@@ -112,8 +117,6 @@ export default function LoginForm() {
         getProject(data.token);
         // console.log(response);
         // console.log(user);
-        alert('Successful login! Redirecting you to the home page...');
-        navigate('/');
     } catch (e) {
         alert(e);
         alert(e.response);

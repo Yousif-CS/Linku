@@ -129,13 +129,13 @@ export default function DashboardApp() {
                 <AppBugReports />
               </Grid>
 
-              {console.log(project)}
+              {console.log(Object.keys(project).length)}
               
-                { project === {} ?
+                { Object.keys(project).length == 0 ?
                 <>
                   <Grid item xs={12} md={6} lg={12}>
                     <Card className={classes.project}>
-                      <Typography variant="h3">You don't have any mentees {user.first_name}!</Typography>
+                      <Typography variant="h3">You don't have any mentees, {user.first_name}!</Typography>
                       <br></br>
                       <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
                         Fill in the below information and click the button to be assigned a new mentee.
@@ -182,9 +182,9 @@ export default function DashboardApp() {
                   // already has a project
                   <Grid item xs={12} md={6} lg={12}>
                     <Card className={classes.project}>
-                      <Typography variant="h3">You already have a project and a mentee {user.first_name}!</Typography>
+                      <Typography variant="h3">You already have a project and a mentee, {user.first_name}!</Typography>
                       <br></br>
-                      <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
+                      <Typography variant="h5" sx={{ opacity: 0.72 }}>
                         Project name: {project.name}
                       </Typography>
                       <Typography variant="h5" sx={{ opacity: 0.72 }}>
@@ -241,7 +241,7 @@ export default function DashboardApp() {
 
             {console.log(project)}
             
-              { project === {} ?
+            { Object.keys(project).length == 0 ?
                 <Grid item xs={12} md={6} lg={12}>
                   <Card className={classes.project}>
                     <Typography variant="h3">You don't have a project or mentor, but we're working on it right now!</Typography>
@@ -290,7 +290,7 @@ export default function DashboardApp() {
                 // already has a project
                 <Grid item xs={12} md={6} lg={12}>
                   <Card className={classes.project}>
-                    <Typography variant="h3">You already have a project and a mentor {user.first_name}!</Typography>
+                    <Typography variant="h3">You already have a project and a mentor, {user.first_name}!</Typography>
                     <br></br>
                     <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
                       Name: {project.name}
