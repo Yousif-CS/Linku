@@ -8,19 +8,21 @@ export default class UsersController {
 
     const user = auth.use('api').user!
 
-    const mentor = await Mentor.query().preload('user', (query) => {
-      query.where('users.id', user.id)
-    })
+    const mentor = await Mentor.findBy('user_id', user.id)
 
-    const mentee = await Mentee.query().preload('user', (query) => {
-      query.where('users.id', user.id)
-    })
+    console.log(user)
+    console.log(mentor)
 
-    const projects =
-      mentor.length > 0
-        ? await mentor[0].related('project').query()
-        : await mentee[0].related('project').query()
+    const mentee = await Mentee.findBy('user_id', user.id)
+    console.log(mentee)
 
-    return response.ok(projects)
+    if (mentor) {
+      const projects = await mentor.related('project').query()
+      return response.ok(projects)
+    } else if (mentee) {
+      const projects = await mentee.related('project').query()
+      return response.ok(projects)
+    }
+    return response.noContent()
   }
 }
