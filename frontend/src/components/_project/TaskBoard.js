@@ -9,27 +9,24 @@ import { CustomCard } from './CustomCard';
 import { CreateCustomCard } from './CustomCreateCard';
 import { TestCard } from './TestCard';
 import './Board.css'
+
 // ----------------------------------------------------------------------
 
 const components = {
-  card: CustomCard,
   NewCardForm: CreateCustomCard,
 }
 
 export default function TaskBoard() {
   const context = React.useContext(AppContext);
-  const [board, setBoard] = [context.board, context.setBoard];
   const [tasks, setTasks] = [context.tasks, context.setTasks];
-
+  const [board, setBoard] = [context.board, context.setBoard];
+  
   return (
-    <div>
-      {console.log(tasks)}
-      <Board
-        className="boardContainer"
-        data={board} 
-        components={components} 
-        editable
-      />
-    </div>
-  );
+    <Board
+      data={board}
+      draggable
+      components={components}
+      editable
+    />
+  )
 }

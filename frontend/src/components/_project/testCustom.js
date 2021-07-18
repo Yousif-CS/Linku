@@ -7,11 +7,21 @@ import { TextField, Button, Paper } from '@material-ui/core';
 import './Board.css';
 import axios from 'axios';
 import baseURL from '../../utils/baseURL';
-import { makeStyles } from "@material-ui/styles";
 
 import Board from 'react-trello';
 import { AppContext } from '../../utils/Store';
 import styled, {createGlobalStyle, css} from 'styled-components'
+import {
+  MovableCardWrapper,
+  CardHeader,
+  CardRightContent,
+  CardTitle,
+  Detail,
+  Footer
+} from 'react-trello'
+import InlineInput from 'react-trello'
+import Tag from 'react-trello'
+import DeleteButton from 'react-trello'
 
 // ----------------------------------------------------------------------
 
@@ -27,42 +37,21 @@ const CardWrapper = styled.article`
   min-width: 230px;
 `
 
-const useStyles = makeStyles({
-  underline: {
-    "&&&:before": {
-      borderBottom: "none"
-    },
-    "&&:after": {
-      borderBottom: "none"
-    }
-  }
-});
-
-export const CustomCard = ({
+const CustomBoi = ({
   onDelete,
   onClick,
   className,
-  title,
-  description,
-  label,
+  name,
+  cardStyle,
+  body,
+  dueOn,
+  cardColor,
+  subTitle,
+  tagStyle,
+  escalationText,
+  tags,
 }) => {
   
-  const classes = useStyles();
-  const [submitTitle, setTitle] = React.useState('');
-  const [submitDescription, setDescription] = React.useState('');
-  const [submitLabel, setLabel] = React.useState('');
-  const onTitleChange = e => {
-    setTitle(e.target.value);
-  }
-
-  const onDescriptionChange = e => {
-    setDescription(e.target.value);
-  }
-
-  const onLabelChange = e => {
-    setLabel(e.target.value);
-  }
-
   const handleDelete = e => {
     onDelete();
     e.stopPropagation();
@@ -70,8 +59,20 @@ export const CustomCard = ({
   return (
     <CardWrapper
       onClick={onClick}
+      style={cardStyle}
       className={className}
     >
+      <Paper>
+      <div className='addTaskContainer'>
+        <TextField id="standard-textarea" placeholder="Set title..." />
+      </div>
+      <div className='addTaskContainer'>
+        <TextField id="standard-textarea" placeholder="Set description..." />
+      </div>
+      <div className='addTaskContainer'>
+        <TextField id="standard-textarea" placeholder="Set label..." />
+      </div>
+    </Paper>
       <header
         style={{
           borderBottom: '1px solid #eee',
@@ -80,11 +81,19 @@ export const CustomCard = ({
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-between',
+          color: cardColor
         }}>
-        <TextField onChange={onTitleChange} id="standard-basic" InputProps={{classes}} variant='standard' defaultValue={title} />
-        <TextField onChange={onDescriptionChange} id="standard-basic" InputProps={{classes}} variant='standard' defaultValue={label} />
+        <p>{name}</p>
+        <div style={{fontSize: 14, fontWeight: 'bold'}}>{name}</div>
+        <div style={{fontSize: 11}}>{dueOn}</div>
       </header>
-      <TextField onChange={onLabelChange} id="standard-basic" InputProps={{classes}} variant='standard' defaultValue={description} />
+      <div style={{fontSize: 12, color: '#BD3B36'}}>
+        <div style={{color: '#4C4C4C', fontWeight: 'bold'}}>{subTitle}</div>
+        <div style={{padding: '5px 0px'}}>
+          <i>{body}</i>
+        </div>
+        <div style={{marginTop: 10, textAlign: 'center', color: cardColor, fontSize: 15, fontWeight: 'bold'}}>{escalationText}</div>
+      </div>
     </CardWrapper>
   )
 }
@@ -102,9 +111,9 @@ const data = {
         {
           id: 'Card1',
           name: 'John Smith',
-          label: 'due in a day',
+          dueOn: 'due in a day',
           subTitle: 'SMS received at 12:13pm today',
-          description: 'Thanks. Please schedule me for an estimate on Monday.',
+          body: 'Thanks. Please schedule me for an estimate on Monday.',
           escalationText: 'Escalated to OPS-ESCALATIONS!',
           cardColor: '#BD3B36',
           cardStyle: {borderRadius: 6, boxShadow: '0 0 6px 1px #BD3B36', marginBottom: 15},
@@ -113,9 +122,9 @@ const data = {
         {
           id: 'Card2',
           name: 'Card Weathers',
-          label: 'due now',
+          dueOn: 'due now',
           subTitle: 'Email received at 1:14pm',
-          description: 'Is the estimate free, and can someone call me soon?',
+          body: 'Is the estimate free, and can someone call me soon?',
           escalationText: 'Escalated to Admin',
           cardColor: '#E08521',
           cardStyle: {borderRadius: 6, boxShadow: '0 0 6px 1px #E08521', marginBottom: 15},
@@ -130,9 +139,9 @@ const data = {
         {
           id: 'Card3',
           name: 'Michael Caine',
-          label: 'due in a day',
+          dueOn: 'due in a day',
           subTitle: 'Email received at 4:23pm today',
-          description: 'You are welcome. Interested in doing business with you' + ' again',
+          body: 'You are welcome. Interested in doing business with you' + ' again',
           escalationText: 'Escalated to OPS-ESCALATIONS!',
           cardColor: '#BD3B36',
           cardStyle: {borderRadius: 6, boxShadow: '0 0 6px 1px #BD3B36', marginBottom: 15},
@@ -142,4 +151,20 @@ const data = {
       ]
     }
   ]
+}
+
+const components = {
+  Card: CustomBoi,
+};
+
+export default function TestCustom() {
+  const context = React.useContext(AppContext);
+  const [board, setBoard] = [context.board, context.setBoard];
+  
+  return (
+    <div>
+      <Board data={data} components={components} draggable/>
+      <p>yeet</p>
+    </div>
+  );
 }

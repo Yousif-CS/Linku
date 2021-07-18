@@ -32,7 +32,7 @@ export default function LoginForm() {
   const setProject = React.useContext(AppContext).setProject;
   const setTasks = React.useContext(AppContext).setTasks;
   const setMentees = React.useContext(AppContext).setMentees;
-  const [board, setBoard] = [React.useContext(AppContext).board, React.useContext(AppContext).board]
+  const [board, setBoard] = [React.useContext(AppContext).board, React.useContext(AppContext).setBoard]
 
   const getTasks = async (token, projectID) => {
     const config = {
@@ -46,15 +46,16 @@ export default function LoginForm() {
       setMentees(data.mentees); 
       setTasks(data.tasks);
       let temp = board;
-      console.log(temp);
+      //console.log(temp);
       for (var i = 0; i < data.tasks.length; i++) {
         let toInt = parseInt(data.tasks[i].status)
-        console.log(toInt);
-        temp[toInt].cards.push(data.tasks[i]);
-        console.log(temp); 
+        temp.lanes[toInt].cards.push(data.tasks[i]);
+        //console.log(temp); 
       }
-      console.log(temp);
+      //console.log(temp);
+      setBoard(temp);
     } catch (e) {
+      console.log('fugma')
         alert(e);
         alert(e.response);
     }

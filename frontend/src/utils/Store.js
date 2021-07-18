@@ -82,6 +82,8 @@ const appContextDefaultValue = {
     setMentees: () => {},
     messages: [],
     setMessages: () => {},
+    mentor: {},
+    setMentor: () => {},
   };
   
 export const AppContext = React.createContext(appContextDefaultValue);
@@ -93,7 +95,8 @@ export const AppProvider = (props) => {
   const [tasks, setTasks] = React.useState(appContextDefaultValue.tasks)
   const [mentees, setMentees] = React.useState(appContextDefaultValue.mentees)
   const [messages, setMessages] = React.useState(appContextDefaultValue.messages)
-
+  const [mentor, setMentor] = React.useState(appContextDefaultValue.mentor)
+  
   const store = {
     user,
     setUser,
