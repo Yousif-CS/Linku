@@ -78,6 +78,31 @@ export default function DashboardApp() {
     }
   };
   
+  const checkProject = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${user.token}` }
+    };
+    
+    const bodyParameters = {
+      name: projTitle,
+      description: projDesc,
+      user_id: user.user_id,
+    };
+    
+    try {
+        const response = await axios.get(`${baseURL()}/user/projects`,
+        config,
+        );
+        const data = response.data;
+        console.log(response);
+        // navigate('/');
+    } catch (e) {
+        alert(e);
+        alert(e.reponse);
+    }
+  };
+
+  
   const mentor = () => {
     return (
         <Page title="Dashboard">
@@ -157,7 +182,7 @@ export default function DashboardApp() {
   const mentee = () => {
     return (<> Mentee</>)
   }
-  
+  checkProject();
   if (user.role === 'Industry Mentor') {
     return (mentor());
   } else {
