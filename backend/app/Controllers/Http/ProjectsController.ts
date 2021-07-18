@@ -79,6 +79,7 @@ export default class ProjectsController {
     // Get the tasks
     await project.load('tasks')
     await project.load('mentor')
+    await project.mentor.load('user')
     await project.load('mentees')
     await project.load('chat')
     await Promise.all(
