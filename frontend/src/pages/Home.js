@@ -22,6 +22,8 @@ import { MHidden } from '../components/@material-extend';
 import { experimentalStyled as styled } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/styles/';
 import { Navigate, useRoutes } from 'react-router-dom';
+import POSTS from '../_mocks_/blog';
+import { BlogPostCard, BlogPostsSort, BlogPostsSearch } from '../components/_dashboard/blog';
 
 // ----------------------------------------------------------------------
 
@@ -121,6 +123,9 @@ export default function Home() {
               </Typography>
             </Card>
           </Grid>
+          {POSTS.map((post, index) => (
+                <BlogPostCard key={post.id} post={post} index={index} />
+              ))}
         </Grid>
         </Card>
       </Container>

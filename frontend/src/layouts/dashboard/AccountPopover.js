@@ -40,6 +40,8 @@ export default function AccountPopover() {
   const [open, setOpen] = useState(false);
   const user = React.useContext(AppContext).user;
   const setUser = React.useContext(AppContext).setUser;
+  const context = React.useContext(AppContext);
+  const [project, setProject] = [context.project, context.setProject];
   const navigate = useNavigate();
   const handleOpen = () => {
     setOpen(true);
@@ -49,6 +51,7 @@ export default function AccountPopover() {
   };
   
   const logout = () => {
+    setProject({});
     setUser(defaultUser);
     navigate('/');
   }
