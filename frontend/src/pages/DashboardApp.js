@@ -247,43 +247,8 @@ export default function DashboardApp() {
                     <Typography variant="h3">You don't have a project or mentor, but we're working on it right now!</Typography>
                     <br></br>
                     <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
-                      Fill in the below information and click the button to be assigned a new mentee.
+                      In the meantime, take a read of some of these helpful articles below written by our industry mentors!
                     </Typography>
-                    <Typography variant="h5" sx={{ opacity: 0.72 }}>
-                      You are assigned a mentee who matches you the closest based on company and industry alignments of yourself and the mentee.
-                    </Typography>
-                    <br></br>
-                    <Container>
-                    <TextField
-                      className={classes.inputs}
-                      autoComplete="title"
-                      type="text"
-                      label="Project title"
-                      value={projTitle}
-                      onChange={(e) => {setProjTitle(e.target.value)}}
-                    />
-                    <TextField
-                      className={classes.inputs}
-                      autoComplete="desc"
-                      multiline
-                      rows={5}
-                      type="text"
-                      label="Project description"
-                      value={projDesc}
-                      onChange={(e) => {setProjDesc(e.target.value)}}
-                    />
-                    <LoadingButton
-                      fullWidth
-                      className={classes.inputs}
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                      onClick={() => {createProject()}}
-                    >
-                      Create a new project and assign me a new mentee
-                    </LoadingButton>
-
-                    </Container>
                   </Card>
                 </Grid>
                 :
