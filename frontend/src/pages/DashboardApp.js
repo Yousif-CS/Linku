@@ -292,11 +292,14 @@ export default function DashboardApp() {
                   <Card className={classes.project}>
                     <Typography variant="h3">You already have a project and a mentor, {user.first_name}!</Typography>
                     <br></br>
-                    <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
+                    <Typography variant="h5" sx={{ opacity: 0.72 }}>
                       Name: {project.name}
                     </Typography>
                     <Typography variant="h5" sx={{ opacity: 0.72 }}>
                      Description: {project.description}
+                    </Typography>
+                    <Typography variant="h5" sx={{ opacity: 0.72 }}>
+                     Mentor: Ethan Mitroo
                     </Typography>
                     <br></br>
                     <Container>

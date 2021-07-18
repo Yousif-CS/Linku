@@ -5,7 +5,7 @@ import peopleFill from '@iconify/icons-eva/people-fill';
 import fileTextFill from '@iconify/icons-eva/file-text-fill';
 import lockFill from '@iconify/icons-eva/lock-fill';
 import personAddFill from '@iconify/icons-eva/person-add-fill';
-import alertTriangleFill from '@iconify/icons-eva/alert-triangle-fill';
+import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 
 // ----------------------------------------------------------------------
@@ -16,7 +16,7 @@ const sidebarConfig = [
   {
     title: 'Home',
     path: '/dashboard/app',
-    icon: getIcon(pieChart2Fill)
+    icon: getIcon(homeFill)
   },
   {
     title: 'project board',
@@ -24,7 +24,7 @@ const sidebarConfig = [
     icon: getIcon(checkmarkSquare2Fill)
   },
   {
-    title: 'Other mentors and mentees',
+    title: 'Mentors on LinkU',
     path: '/dashboard/user',
     icon: getIcon(peopleFill)
   },
