@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
@@ -30,7 +29,59 @@ export default function LoginForm() {
   const [password, setPassword] = useState('');
   const user = React.useContext(AppContext).user;
   const setUser = React.useContext(AppContext).setUser;
-  
+  const setProject = React.useContext(AppContext).setProject;
+  const setTasks = React.useContext(AppContext).setTasks;
+  const setMentees = React.useContext(AppContext).setMentees;
+  const [board, setBoard] = [React.useContext(AppContext).board, React.useContext(AppContext).board]
+
+  const getTasks = async (token, projectID) => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    try {
+      const response = await axios.get(`${baseURL()}/project/${projectID}`,
+      config
+    );
+      const data = response.data;
+      setMentees(data.mentees); 
+      setTasks(data.tasks);
+      let temp = board;
+      console.log(temp);
+      for (var i = 0; i < data.tasks.length; i++) {
+        let toInt = parseInt(data.tasks[i].status)
+        console.log(toInt);
+        temp[toInt].cards.push(data.tasks[i]);
+        console.log(temp); 
+      }
+      console.log(temp);
+    } catch (e) {
+        alert(e);
+        alert(e.response);
+    }
+  }
+
+  const getProject = async (token) => {
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    try {
+        const response = await axios.get(`${baseURL()}/user/projects`,
+        config
+      );
+      const data = response.data;
+      console.log(data);
+      if (data.length == 0) {
+        setProject({})
+      } else {
+        setProject(data[0]);
+        getTasks(token, data[0].id);
+      }
+    } catch (e) {
+        alert(e);
+        alert(e.response);
+    }
+  }
+
   const loginUser = async () => {
     if (email === '' || password === '') {
         // TODO fancy error
@@ -57,13 +108,14 @@ export default function LoginForm() {
         tempUser.industry = data.industry;
         tempUser.company = data.company;
         setUser(tempUser);
-        console.log(response);
-        console.log(user);
+        getProject(data.token);
+        // console.log(response);
+        // console.log(user);
         alert('Successful login! Redirecting you to the home page...');
         navigate('/');
     } catch (e) {
         alert(e);
-        alert(e.reponse);
+        alert(e.response);
     }
   };
 

@@ -4,18 +4,10 @@ import { Box, Grid, Container, Typography, Card, Stack, Link, TextField } from '
 // components
 import Page from '../components/Page';
 import {
-  AppTasks,
   AppNewUsers,
   AppBugReports,
   AppItemOrders,
-  AppNewsUpdate,
   AppWeeklySales,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppCurrentSubject,
-  AppConversionRates
 } from '../components/_dashboard/app';
 import { AppContext } from '../utils/Store';
 import { makeStyles } from '@material-ui/styles/';
@@ -46,8 +38,8 @@ const useStyles = makeStyles({
 
 export default function DashboardApp() {
   const user = React.useContext(AppContext).user;
-  const project = React.useContext(AppContext).project;
-  const setProject = React.useContext(AppContext).setProject;
+  const context = React.useContext(AppContext);
+  const [project, setProject] = [context.project, context.setProject];
   
   const classes = useStyles();
   const [projTitle, setProjTitle] = React.useState('');
@@ -77,6 +69,7 @@ export default function DashboardApp() {
         const data = response.data;
         
         console.log(response);
+        setProject(response.data);
         alert('We found you a mentee! Redirecting you to the project page...');
         // navigate('/');
     } catch (e) {
@@ -105,51 +98,56 @@ export default function DashboardApp() {
               <Grid item xs={12} sm={6} md={3}>
                 <AppBugReports />
               </Grid>
-    
-              <Grid item xs={12} md={6} lg={12}>
-                <Card className={classes.project}>
-                  <Typography variant="h3">You don't have any mentees {user.first_name}!</Typography>
-                  <br></br>
-                  <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
-                    Fill in the below information and click the button to be assigned a new mentee.
-                  </Typography>
-                  <Typography variant="h5" sx={{ opacity: 0.72 }}>
-                    You are assigned a mentee who matches you the closest based on company and industry alignments of yourself and the mentee.
-                  </Typography>
-                  <br></br>
-                  <Container>
-                  <TextField
-                    className={classes.inputs}
-                    autoComplete="title"
-                    type="text"
-                    label="Project title"
-                    value={projTitle}
-                    onChange={(e) => {setProjTitle(e.target.value)}}
-                  />
-                  <TextField
-                    className={classes.inputs}
-                    autoComplete="desc"
-                    multiline
-                    rows={5}
-                    type="text"
-                    label="Project description"
-                    value={projDesc}
-                    onChange={(e) => {setProjDesc(e.target.value)}}
-                  />
-                  <LoadingButton
-                    fullWidth
-                    className={classes.inputs}
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                    onClick={() => {createProject()}}
-                  >
-                    Create a new project and assign me a new mentee
-                  </LoadingButton>
 
-                  </Container>
-                </Card>
-              </Grid>
+              {console.log(project)}
+              
+                { project !== {} ?
+                  <Grid item xs={12} md={6} lg={12}>
+                    <Card className={classes.project}>
+                      <Typography variant="h3">You don't have any mentees {user.first_name}!</Typography>
+                      <br></br>
+                      <Typography gutterBottom variant="h5" sx={{ opacity: 0.72 }}>
+                        Fill in the below information and click the button to be assigned a new mentee.
+                      </Typography>
+                      <Typography variant="h5" sx={{ opacity: 0.72 }}>
+                        You are assigned a mentee who matches you the closest based on company and industry alignments of yourself and the mentee.
+                      </Typography>
+                      <br></br>
+                      <Container>
+                      <TextField
+                        className={classes.inputs}
+                        autoComplete="title"
+                        type="text"
+                        label="Project title"
+                        value={projTitle}
+                        onChange={(e) => {setProjTitle(e.target.value)}}
+                      />
+                      <TextField
+                        className={classes.inputs}
+                        autoComplete="desc"
+                        multiline
+                        rows={5}
+                        type="text"
+                        label="Project description"
+                        value={projDesc}
+                        onChange={(e) => {setProjDesc(e.target.value)}}
+                      />
+                      <LoadingButton
+                        fullWidth
+                        className={classes.inputs}
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        onClick={() => {createProject()}}
+                      >
+                        Create a new project and assign me a new mentee
+                      </LoadingButton>
+
+                      </Container>
+                    </Card>
+                  </Grid>
+                  : null
+                }
             </Grid>
           </Container>
         </Page>

@@ -15,7 +15,7 @@ export const defaultUser = {
 }
 
 const cardStyle = {
-  backgroundColor: '#eef3f9',
+  backgroundColor: '#e1e9f2',
   flexGrow: 1,
   boxShadow: 10,
   borderRadius: 10,
@@ -40,42 +40,31 @@ const titleStyle = {
 export const boardData = {
   lanes: [
     {
-      id: 0,
+      id: "0",
       title: 'To-Do',
       label: '12/12',
       style: cardStyle,
       titleStyle: titleStyle,
       labelStyle: labelStyle,
-      cards: [
-        {
-          title: 'test',
-          description: 'yeet',
-          label: 'xdxd',
-          status: 'complete',
-          mentee_id: 1,
-          project_id: 2,
-          cardColor: '#BD3B36',
-          cardStyle: {borderRadius: 6, boxShadow: '0 0 6px 1px #BD3B36', marginBottom: 15},
-          metadata: {id: 'Card1'},
-          tags: [{title: 'Critical', color: 'white', bgcolor: 'red'}, {title: '2d ETA', color: 'white', bgcolor: '#0079BF'}]
-        },
-      ]
+      cards: []
     },
     {
-      id: 1,
+      id: "1",
       title: 'In Progress',
       cards: [],
       style: cardStyle,
       titleStyle: titleStyle,
       labelStyle: labelStyle,
+      editable: false,
     },
     {
-      id: 2,
+      id: "2",
       title: 'Complete',
       cards: [],
       style: cardStyle,
       titleStyle: titleStyle,
       labelStyle: labelStyle,
+      editable: false,
     },
   ]
 }
@@ -86,7 +75,13 @@ const appContextDefaultValue = {
     board: boardData,
     setBoard: () => {},
     project: {},
-    setProject: {},
+    setProject: () => {},
+    tasks: [],
+    setTasks: () => {},
+    mentees: [],
+    setMentees: () => {},
+    messages: [],
+    setMessages: () => {},
   };
   
 export const AppContext = React.createContext(appContextDefaultValue);
@@ -95,7 +90,10 @@ export const AppProvider = (props) => {
   const [user, setUser] = React.useState(appContextDefaultValue.user);
   const [board, setBoard] = React.useState(appContextDefaultValue.board);
   const [project, setProject] = React.useState(appContextDefaultValue.project);
-  
+  const [tasks, setTasks] = React.useState(appContextDefaultValue.tasks)
+  const [mentees, setMentees] = React.useState(appContextDefaultValue.mentees)
+  const [messages, setMessages] = React.useState(appContextDefaultValue.messages)
+
   const store = {
     user,
     setUser,
@@ -103,6 +101,12 @@ export const AppProvider = (props) => {
     setBoard,
     project,
     setProject,
+    tasks,
+    setTasks,
+    mentees,
+    setMentees,
+    messages,
+    setMessages
   }
 
   return (

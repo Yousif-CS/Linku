@@ -6,7 +6,7 @@ import { Paper, TextField, IconButton } from '@material-ui/core';
 import { AppContext } from '../../utils/Store';
 import chatHead from '@iconify/icons-ant-design/aliwangwang-filled';
 import { makeStyles } from '@material-ui/styles';
-import SenderMessage from './SenderMessage';
+import ReceiveMessage from './ReceiveMessage';
 import MyMessage from './MyMessage';
 import './Chat.css';
 
@@ -93,7 +93,7 @@ export default function ChatComponent() {
         open ? 
         <>
         <Paper elevation={5} className={classes.blep}>
-            {rep.map((msg) => <SenderMessage message={msg} />)}
+            {rep.map((msg) => <ReceiveMessage message={msg} />)}
             {send.map((msg) => <MyMessage className={classes.help} message={msg}>msg.message</MyMessage>)}
             <TextField variant="filled" color="secondary" InputProps={{
               className: classes.input,

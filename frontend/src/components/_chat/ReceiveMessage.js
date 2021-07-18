@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function SenderMessage({message}) {
+export default function ReceiveMessage({message}) {
   const classes = useStyles();
 
   return (
