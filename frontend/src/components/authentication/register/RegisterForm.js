@@ -36,7 +36,7 @@ export default function RegisterForm() {
         alert('A field below is empty!');
         return;
     }
-    
+
     try {
         const type = (mentee ? "/mentee" : "/mentor");
         const response = await axios.post(`${baseURL()}/register${type}`,
